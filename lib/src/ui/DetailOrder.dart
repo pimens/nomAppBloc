@@ -190,7 +190,7 @@ class _DetailOrderState extends State<DetailOrder> {
                   if (state is GlobalStateDefault) {
                     _globalBloc.add(GlobalTrxLoad(t: notrx));
                   } else if (state is GlobalStateLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(child: CircularProgressIndicator(backgroundColor: Color.fromRGBO(243, 156, 18, 20),));
                   } else if (state is GlobalStateLoaded) {
                     return detail(state.data);
                   } else if (state is GlobalStateError) {

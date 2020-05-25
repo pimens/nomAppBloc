@@ -235,7 +235,7 @@ class _BerandaState extends State<Beranda> {
                 if (state is MakananStateDefault) {
                   _makananBloc.add(MakananEventLoad());
                 } else if (state is MakananStateLoading) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator(backgroundColor: Color.fromRGBO(243, 156, 18, 20),));
                 } else if (state is MakananStateError) {
                   return Center(child: Text(state.message.toString()));
                 } else if (state is MakananStateLoaded) {

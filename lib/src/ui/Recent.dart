@@ -53,6 +53,7 @@ class _RecentState extends State<Recent> {
     super.dispose();
     timer.cancel();
   }
+  
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 

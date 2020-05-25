@@ -43,7 +43,7 @@ class CabangClass extends StatelessWidget {
                   if (state is CabangStateDefault) {
                     _cabangBloc.add(CabangEventLoad());
                   } else if (state is CabangStateLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(child: CircularProgressIndicator(backgroundColor: Color.fromRGBO(243, 156, 18, 20),));
                   } else if (state is CabangStateError) {
                     return Center(child: Text(state.message.toString()));
                   } else if (state is CabangStateLoaded) {
