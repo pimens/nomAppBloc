@@ -34,7 +34,6 @@ class _BerandaState extends State<Beranda> {
   }
 
   Widget but(List<Makanan> data) {
-    Size size = MediaQuery.of(context).size;
     return ListView(
       children: <Widget>[
         ListView.builder(
@@ -74,7 +73,7 @@ class _BerandaState extends State<Beranda> {
                                   },
                                 ),
                               )
-                            : Column(                             
+                            : Column(
                                 children: <Widget>[
                                   Container(
                                     margin: EdgeInsets.only(bottom: 7.0),
@@ -204,7 +203,6 @@ class _BerandaState extends State<Beranda> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     _makananBloc = BlocProvider.of<MakananBloc>(context);
     return Scaffold(
       key: _scaffoldKey,
@@ -235,7 +233,10 @@ class _BerandaState extends State<Beranda> {
                 if (state is MakananStateDefault) {
                   _makananBloc.add(MakananEventLoad());
                 } else if (state is MakananStateLoading) {
-                  return Center(child: CircularProgressIndicator(backgroundColor: Color.fromRGBO(243, 156, 18, 20),));
+                  return Center(
+                      child: CircularProgressIndicator(
+                    backgroundColor: Color.fromRGBO(243, 156, 18, 20),
+                  ));
                 } else if (state is MakananStateError) {
                   return Center(child: Text(state.message.toString()));
                 } else if (state is MakananStateLoaded) {
@@ -342,6 +343,7 @@ class _BerandaState extends State<Beranda> {
                 } else {
                   return Container(width: 0.0, height: 0.0);
                 }
+                return Container(width: 0.0, height: 0.0);
               })),
     );
   }

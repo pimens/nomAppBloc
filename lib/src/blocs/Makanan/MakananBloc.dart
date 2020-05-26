@@ -29,7 +29,6 @@ class MakananBloc extends Bloc<MakananEvent, MakananState> {
         yield MakananStateLoading();
         // this.allMakanan = event.m;
         for (int i = 0; i < this.allMakanan.length; i++) {
-          int flag = 0;
           if (int.parse(this.allMakanan[i].tmp) > 0) {
             {
               Makanan x = this.allMakanan[i];

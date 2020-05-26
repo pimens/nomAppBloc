@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:KimochiApps/src/ui/util/const.dart';
 import 'package:expandable/expandable.dart';
-import 'package:KimochiApps/src/ui/util/const.dart';
 
 
 class ItemSearch extends StatefulWidget {

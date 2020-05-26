@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:core';
 import 'package:KimochiApps/src/ui/Order.dart';
 
-// class CabangClass extends StatefulWidget { 
+// class CabangClass extends StatefulWidget {
 //   @override
 //   _CabangState createState() => _CabangState();
 // }
@@ -43,7 +43,10 @@ class CabangClass extends StatelessWidget {
                   if (state is CabangStateDefault) {
                     _cabangBloc.add(CabangEventLoad());
                   } else if (state is CabangStateLoading) {
-                    return Center(child: CircularProgressIndicator(backgroundColor: Color.fromRGBO(243, 156, 18, 20),));
+                    return Center(
+                        child: CircularProgressIndicator(
+                      backgroundColor: Color.fromRGBO(243, 156, 18, 20),
+                    ));
                   } else if (state is CabangStateError) {
                     return Center(child: Text(state.message.toString()));
                   } else if (state is CabangStateLoaded) {
@@ -51,6 +54,7 @@ class CabangClass extends StatelessWidget {
                   } else {
                     return Container(width: 0.0, height: 0.0);
                   }
+                  return Container(width: 0.0, height: 0.0);
                 }),
           )),
     );

@@ -35,12 +35,11 @@ class _OrderState extends State<Order> {
   void initState() {
     super.initState();
     this.ambildata();
-
   }
 
   Future ambildata() async {
     http.Response hasil = await http.get(
-        Uri.encodeFull(Constants.server+"Api/getMaxTrx"),
+        Uri.encodeFull(Constants.server + "Api/getMaxTrx"),
         headers: {"Accept": "application/json"});
     this.setState(() {
       trx = json.decode(hasil.body);
@@ -86,8 +85,8 @@ class _OrderState extends State<Order> {
 
   Future userExist(List<Makanan> order) async {
     http.Response hasil = await http.get(
-        Uri.encodeFull(Constants.server+"Api/getJUser/" +
-            hpCont.text.toString()),
+        Uri.encodeFull(
+            Constants.server + "Api/getJUser/" + hpCont.text.toString()),
         headers: {"Accept": "application/json"});
     this.setState(() {
       List u = json.decode(hasil.body);
@@ -95,24 +94,25 @@ class _OrderState extends State<Order> {
       if (isNewUser == 0) {
         insertUser(order);
       } else {
-        addToApi(isNewUser,order);
+        addToApi(isNewUser, order);
       }
     });
   }
 
   Future insertUser(List<Makanan> order) async {
-    http.Response hasil = await http.get(
-        Uri.encodeFull(Constants.server+"Api/insertUser/" +
+    await http.get(
+        Uri.encodeFull(Constants.server +
+            "Api/insertUser/" +
             namaCont.text.toString() +
             "/" +
             hpCont.text.toString()),
         headers: {"Accept": "application/json"});
     this.setState(() {
-      addToApi(isNewUser,order);
+      addToApi(isNewUser, order);
     });
   }
 
-  addToApi(int isNewUser,List<Makanan> order) { 
+  addToApi(int isNewUser, List<Makanan> order) {
     for (int i = 0; i < order.length; i++) {
       insert(
           hpCont.text,
@@ -133,7 +133,7 @@ class _OrderState extends State<Order> {
     int tmp = int.parse(trx[0]['x']);
     tmp = tmp + 1;
     var url = 'http://192.168.43.184/nomAdmin/Api/insertInvoice';
-    var response = await http.post(url, body: {
+    await http.post(url, body: {
       "nama": n,
       "hp": hp,
       "mkn": m,
@@ -154,7 +154,7 @@ class _OrderState extends State<Order> {
   @override
   Widget build(BuildContext context) {
     _makananBloc = BlocProvider.of<MakananBloc>(context);
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -212,8 +212,9 @@ class _OrderState extends State<Order> {
                                                   8,
                                               child: CircleAvatar(
                                                   radius: 20,
-                                                  backgroundImage: NetworkImage(Constants.server+
-                                                      mkn.gambar))),
+                                                  backgroundImage: NetworkImage(
+                                                      Constants.server +
+                                                          mkn.gambar))),
                                           Text(
                                             mkn.tmp + "   ",
                                             style: TextStyle(
@@ -392,6 +393,7 @@ class _OrderState extends State<Order> {
                       ),
                     );
                   }
+                  return Container(width: 0.0, height: 0.0);
                 }),
           ),
         ],

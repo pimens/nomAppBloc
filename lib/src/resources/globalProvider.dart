@@ -18,8 +18,9 @@ class GlobalProvider {
     }
   }
   Future delete(String notrx) async {
-    var hasil = await client.get(
+    await client.get(
         Uri.encodeFull(Constants.server + "Api/deleteTrx/" + notrx),
         headers: {"Accept": "application/json"});
+    
   }
 }

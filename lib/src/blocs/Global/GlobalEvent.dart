@@ -1,4 +1,3 @@
-import 'package:KimochiApps/src/models/TrxModels.dart';
 import 'package:equatable/equatable.dart';
 
 

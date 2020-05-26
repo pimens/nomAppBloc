@@ -1,6 +1,5 @@
 import 'package:KimochiApps/src/blocs/Global/GlobalBloc.dart';
 import 'package:KimochiApps/src/blocs/Global/GlobalEvent.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:KimochiApps/src/ui/DetailOrder.dart';
 import 'package:KimochiApps/src/ui/component/Legend.dart';
@@ -29,26 +28,6 @@ class _RecentState extends State<Recent> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     user = prefs.getStringList('user') ?? [];
     // data_login = prefs.getString('login') ?? '';
-  }
-
-  Widget judul(BuildContext context, String alamat) {
-    return ExpandablePanel(
-      // header: Text("xxx"),
-      collapsed: Text(
-        alamat,
-        style: TextStyle(fontSize: 25.0, fontFamily: 'ZCOOL QingKe HuangYou'),
-        softWrap: true,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-      expanded: Text(
-        alamat,
-        softWrap: true,
-        style: TextStyle(fontSize: 25.0, fontFamily: 'ZCOOL QingKe HuangYou'),
-      ),
-      tapHeaderToExpand: true,
-      hasIcon: true,
-    );
   }
 
   Future ambildata() async {
@@ -107,7 +86,8 @@ class _RecentState extends State<Recent> {
         ),
       ),
       body: Container(
-        margin: EdgeInsets.only(top: 7),
+        // color: Colors.deepOrange[50],
+        // margin: EdgeInsets.only(top: 7),
         child: Column(
           children: <Widget>[
             Expanded(
@@ -120,123 +100,151 @@ class _RecentState extends State<Recent> {
                 itemBuilder: (BuildContext context, int index) {
                   // Map menu = dataMenu[index];
                   return Container(
+                      color: Colors.deepOrange[50],
+                      margin: EdgeInsets.only(left: 6.0, right: 6.0, top: 2.0),
                       // height: MediaQuery.of(context).size.height / 6,
                       // width: MediaQuery.of(context).size.width / 1.3,
                       child: Card(
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                            color: Color.fromRGBO(243, 156, 18, 20),
-                            width: 0,
-                            style: BorderStyle.solid),
-                        borderRadius: BorderRadius.circular(10.0)),
-                    elevation: 3.0,
-                    child: Container(
-                      padding: EdgeInsets.only(top: 15),
-                      child: Column(
-                        children: <Widget>[
-                          FlatButton(
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 8),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.calendar_today,
-                                        color: Color.fromRGBO(243, 156, 18, 20),
-                                        size: 25,
-                                      ),
-                                      Text(
-                                        " " +
-                                            current[index]['tanggal']
-                                                .toString() +
-                                            "  ",
-                                        style: TextStyle(
-                                          fontFamily: 'ZCOOL QingKe HuangYou',
-                                          color: Colors.black,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Icon(
-                                        Icons.local_atm,
-                                        color: Color.fromRGBO(243, 156, 18, 20),
-                                        size: 25,
-                                      ),
-                                      Text(
-                                        " " +
-                                            current[index]['total'].toString() +
-                                            "  ",
-                                        style: TextStyle(
-                                          fontFamily: 'ZCOOL QingKe HuangYou',
-                                          color: Colors.black,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Icon(
-                                        current[index]['status'].toString() ==
-                                                "0"
-                                            ? Icons.close
-                                            : current[index]['status']
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                                color: Color.fromRGBO(243, 156, 18, 20),
+                                width: 0,
+                                style: BorderStyle.solid),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 3.0,
+                        child: Container(
+                          color: Colors.grey[100],
+                          padding: EdgeInsets.only(top: 15),
+                          child: Column(
+                            children: <Widget>[
+                              FlatButton(
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 8),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.calendar_today,
+                                            color: Color.fromRGBO(
+                                                243, 156, 18, 20),
+                                            size: 25,
+                                          ),
+                                          Text(
+                                            " " +
+                                                current[index]['tanggal']
+                                                    .toString() +
+                                                "  ",
+                                            style: TextStyle(
+                                              fontFamily:
+                                                  'ZCOOL QingKe HuangYou',
+                                              color: Colors.black,
+                                              fontSize: 25,
+                                            ),
+                                            textAlign: TextAlign.left,
+                                          ),
+                                          Icon(
+                                            Icons.local_atm,
+                                            color: Color.fromRGBO(
+                                                243, 156, 18, 20),
+                                            size: 25,
+                                          ),
+                                          Text(
+                                            " " +
+                                                current[index]['total']
+                                                    .toString() +
+                                                "  ",
+                                            style: TextStyle(
+                                              fontFamily:
+                                                  'ZCOOL QingKe HuangYou',
+                                              color: Colors.black,
+                                              fontSize: 25,
+                                            ),
+                                            textAlign: TextAlign.left,
+                                          ),
+                                          Icon(
+                                            current[index]['status']
                                                         .toString() ==
-                                                    "1"
-                                                ? Icons.check_box
+                                                    "0"
+                                                ? Icons.close
                                                 : current[index]['status']
                                                             .toString() ==
-                                                        "2"
-                                                    ? Icons.playlist_add_check
-                                                    : Icons.motorcycle,
-                                        color: Color.fromRGBO(243, 156, 18, 20),
-                                        size: 25.0,
+                                                        "1"
+                                                    ? Icons.check_box
+                                                    : current[index]
+                                                                    ['status']
+                                                                .toString() ==
+                                                            "2"
+                                                        ? Icons
+                                                            .playlist_add_check
+                                                        : Icons.motorcycle,
+                                            color: Color.fromRGBO(
+                                                243, 156, 18, 20),
+                                            size: 25.0,
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.location_on,
-                                      color: Color.fromRGBO(243, 156, 18, 20),
-                                      size: 25,
                                     ),
-                                    Expanded(
-                                      child: Text(
-                                        current[index]['alamat'].toString(),
-                                        style: TextStyle(
-                                          fontFamily: 'ZCOOL QingKe HuangYou',
-                                          color: Colors.black,
-                                          fontSize: 25,
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.location_on,
+                                          color:
+                                              Color.fromRGBO(243, 156, 18, 20),
+                                          size: 25,
                                         ),
-                                        textAlign: TextAlign.left,
-                                      ),
+                                        Expanded(
+                                          child: Text(
+                                            current[index]['alamat'].toString(),
+                                            style: TextStyle(
+                                              fontFamily:
+                                                  'ZCOOL QingKe HuangYou',
+                                              color: Colors.black,
+                                              fontSize: 25,
+                                            ),
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                            onPressed: () {
-                              _globalBloc.add(GlobalTrxLoad(t: current[index]['notrx'].toString()));
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailOrder(
-                                      notrx:
-                                          current[index]['notrx'].toString()),
-                                ),
-                              );
-                            },
+                                onPressed: () {
+                                  _globalBloc.add(GlobalTrxLoad(
+                                      t: current[index]['notrx'].toString()));
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailOrder(
+                                          notrx: current[index]['notrx']
+                                              .toString()),
+                                    ),
+                                  );
+                                },
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  const Divider(
+                                    color: Colors.black,
+                                    thickness: 2,
+                                    // indent: 20,
+                                    endIndent: 0,
+                                  ),
+                                  const Divider(
+                                    color: Color.fromRGBO(243, 156, 18, 10),
+                                    height: 0,
+                                    thickness: 5,
+                                    // indent: 20,
+                                    endIndent: 0,
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                          Divider(
-                            thickness: 2,
-                            color: Color.fromRGBO(243, 156, 18, 10),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ));
+                        ),
+                      ));
                 },
               ),
             ),

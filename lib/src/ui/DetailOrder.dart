@@ -5,10 +5,6 @@ import 'package:KimochiApps/src/models/TrxModels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:core';
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert';
-
 import 'Beranda.dart';
 import 'package:KimochiApps/src/ui/util/const.dart';
 
@@ -127,8 +123,8 @@ class _DetailOrderState extends State<DetailOrder> {
                 fontFamily: 'ZCOOL QingKe HuangYou',
               ),
             ),
-          ),         
-         data[0].status.toString() == "0" ? cancel() : Text(""),
+          ),
+          data[0].status.toString() == "0" ? cancel() : Text(""),
         ],
       ),
     );
@@ -163,7 +159,6 @@ class _DetailOrderState extends State<DetailOrder> {
   @override
   Widget build(BuildContext context) {
     _globalBloc = BlocProvider.of<GlobalBloc>(context);
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -188,7 +183,10 @@ class _DetailOrderState extends State<DetailOrder> {
                   if (state is GlobalStateDefault) {
                     _globalBloc.add(GlobalTrxLoad(t: notrx));
                   } else if (state is GlobalStateLoading) {
-                    return Center(child: CircularProgressIndicator(backgroundColor: Color.fromRGBO(243, 156, 18, 20),));
+                    return Center(
+                        child: CircularProgressIndicator(
+                      backgroundColor: Color.fromRGBO(243, 156, 18, 20),
+                    ));
                   } else if (state is GlobalStateLoaded) {
                     return detail(state.data);
                   } else if (state is GlobalStateError) {
@@ -196,6 +194,7 @@ class _DetailOrderState extends State<DetailOrder> {
                   } else {
                     return Container(width: 0.0, height: 0.0);
                   }
+                  return Container(width: 0.0, height: 0.0);
                 }),
           ),
         ],

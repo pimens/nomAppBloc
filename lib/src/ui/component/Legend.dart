@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:KimochiApps/src/ui/Recent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Draw extends StatelessWidget {
-  static List data_login = [];
+  static List dataLogin = [];
   getValuesSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    data_login = prefs.getStringList('user') ?? [];
-    // data_login = prefs.getString('login') ?? '';
+    dataLogin = prefs.getStringList('user') ?? [];
+    // dataLogin = prefs.getString('login') ?? '';
   }
 
   logout() async {
@@ -18,12 +17,14 @@ class Draw extends StatelessWidget {
   Draw() {
     getValuesSF();
   }
-  Widget DrawNom(BuildContext context) {
+  Widget drawNom(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
+            accountEmail: Text(""),
+            accountName: Text(""),
             currentAccountPicture: GestureDetector(
               child: SizedBox(
                 width: 128,
@@ -110,6 +111,6 @@ class Draw extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DrawNom(context);
+    return drawNom(context);
   }
 }

@@ -1,6 +1,4 @@
-import 'package:KimochiApps/src/models/makananModels.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 
 class MakananEvent extends Equatable {
