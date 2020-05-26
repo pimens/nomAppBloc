@@ -18,7 +18,7 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
         var result = await gr.getDetailOrder(event.t.toString());
         print("====================xxx" + result.toString());
         this.allTrx = result;
-        yield GlobalStateLoaded(this.allTrx);
+        yield GlobalStateLoaded(result);
       } catch (message) {
         yield GlobalStateError(message: message.toString());
       }

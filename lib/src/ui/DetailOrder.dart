@@ -127,10 +127,8 @@ class _DetailOrderState extends State<DetailOrder> {
                 fontFamily: 'ZCOOL QingKe HuangYou',
               ),
             ),
-          ),
-          data.length == 0
-              ? Text("")
-              : data[0].status == "0" ? cancel() : Text(""),
+          ),         
+         data[0].status.toString() == "0" ? cancel() : Text(""),
         ],
       ),
     );
