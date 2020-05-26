@@ -66,6 +66,7 @@ class _BerandaState extends State<Beranda> {
                                 child: GestureDetector(
                                   child: Icon(
                                     Icons.add,
+                                    size: 40,
                                     color: Color.fromRGBO(243, 156, 18, 20),
                                   ),
                                   onTap: () {
@@ -86,6 +87,7 @@ class _BerandaState extends State<Beranda> {
                                       child: Icon(
                                         Icons.keyboard_arrow_up,
                                         color: Color.fromRGBO(243, 156, 18, 20),
+                                        size: 30,
                                       ),
                                       onTap: () {
                                         data[index] = addMakanan(data[index]);
@@ -94,7 +96,7 @@ class _BerandaState extends State<Beranda> {
                                   ),
                                   Text(
                                     mkn.tmp.toString(),
-                                    style: TextStyle(fontSize: 20.0),
+                                    style: TextStyle(fontSize: 25.0),
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(top: 7.0),
@@ -106,6 +108,7 @@ class _BerandaState extends State<Beranda> {
                                     child: GestureDetector(
                                       child: Icon(
                                         Icons.keyboard_arrow_down,
+                                        size: 30,
                                         color: Color.fromRGBO(243, 156, 18, 20),
                                       ),
                                       onTap: () {
