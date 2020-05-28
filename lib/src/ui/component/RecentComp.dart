@@ -66,7 +66,7 @@ class CircleWithAnimationState extends State<CircleWithAnimation>
       child: FractionalTranslation(
         child: Material(
           type: MaterialType.circle,
-          color: Colors.white,
+          color: Colors.black,
           elevation: 10.0,
           child: Container(
               decoration: BoxDecoration(

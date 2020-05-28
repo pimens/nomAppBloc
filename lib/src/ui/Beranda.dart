@@ -11,11 +11,31 @@ import 'component/ItemSearch.dart';
 import 'package:KimochiApps/src/ui/util/const.dart';
 
 class Beranda extends StatefulWidget {
+  // @override
+  // _BerandaState createState() => _BerandaState();
   @override
-  _BerandaState createState() => _BerandaState();
+  _BerandaState createState() {
+    return _BerandaState();
+  }
 }
 
-class _BerandaState extends State<Beranda> {
+class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
+  Animation animation;
+  AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    final CurvedAnimation curvedAnimation = CurvedAnimation(
+        parent: animationController, curve: Curves.fastOutSlowIn);
+    animation = Tween<Offset>(begin: Offset(200.0, 0.0), end: Offset(0.0, 0.0))
+        .animate(curvedAnimation);
+
+    animationController.forward();
+  }
+
   MakananBloc _makananBloc;
   Makanan addMakanan(Makanan m) {
     int x = int.parse(m.tmp);
@@ -34,172 +54,172 @@ class _BerandaState extends State<Beranda> {
   }
 
   Widget but(List<Makanan> data) {
-    return ListView(
-      children: <Widget>[
-        ListView.builder(
-          primary: false,
-          shrinkWrap: true,
-          itemCount: data.length,
-          itemBuilder: (BuildContext context, int index) {
-            Makanan mkn = data[index];
-            return GestureDetector(
-                onTap: () {},
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        ItemSearch(
-                          img: mkn.gambar.toString(),
-                          title: mkn.nama,
-                          address: mkn.kategori,
-                          rating: mkn.harga,
-                          view: index.toString(),
-                        ),
-                        mkn.tmp == "0"
-                            ? Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    border: Border.all(),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                child: GestureDetector(
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 30,
-                                    color: Color.fromRGBO(243, 156, 18, 20),
-                                  ),
-                                  onTap: () {
-                                    data[index] = addMakanan(data[index]);
-                                  },
+    return Expanded(
+      child: ListView.builder(
+        primary: false,
+        shrinkWrap: true,
+        itemCount: data.length,
+        itemBuilder: (BuildContext context, int index) {
+          Makanan mkn = data[index];
+          return GestureDetector(
+              onTap: () {},
+              child: Stack(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   children: <Widget>[
+                      // ClippedItem(current: mkn),
+                      ItemSearch(
+                        img: mkn.gambar.toString(),
+                        title: mkn.nama,
+                        address: mkn.kategori,
+                        rating: mkn.harga,
+                        view: index.toString(),
+                      ),
+                      mkn.tmp == "0"
+                          ? Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  border: Border.all(),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              child: GestureDetector(
+                                child: Icon(
+                                  Icons.add,
+                                  size: 30,
+                                  color: Color.fromRGBO(243, 156, 18, 20),
                                 ),
-                              )
-                            : Column(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 7.0),
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: GestureDetector(
-                                      child: Icon(
-                                        Icons.keyboard_arrow_up,
-                                        color: Color.fromRGBO(243, 156, 18, 20),
-                                        size: 30,
-                                      ),
-                                      onTap: () {
-                                        data[index] = addMakanan(data[index]);
-                                      },
-                                    ),
-                                  ),
-                                  Text(
-                                    mkn.tmp.toString(),
-                                    style: TextStyle(fontSize: 25.0),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 7.0),
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: GestureDetector(
-                                      child: Icon(
-                                        Icons.keyboard_arrow_down,
-                                        size: 30,
-                                        color: Color.fromRGBO(243, 156, 18, 20),
-                                      ),
-                                      onTap: () {
-                                        data[index] = minMakanan(data[index]);
-                                      },
-                                    ),
-                                  )
-                                ],
+                                onTap: () {
+                                  data[index] = addMakanan(data[index]);
+                                },
                               ),
-                      ],
-                    ),
-                    // Center(
-                    //   child: mkn.tmp == "0"
-                    //       ? SizedBox(
-                    //           width: double.infinity,
-                    //           child: FlatButton(
-                    //             textColor: Color.fromRGBO(243, 156, 18, 20),
-                    //             color: Colors.black,
-                    //             shape: RoundedRectangleBorder(
-                    //                 side: BorderSide(
-                    //                     color: Color.fromRGBO(243, 156, 18, 20),
-                    //                     width: 0,
-                    //                     style: BorderStyle.solid),
-                    //                 borderRadius: BorderRadius.circular(11)),
-                    //             onPressed: () {
-                    //               data[index] = addMakanan(data[index]);
-                    //               // addMakanan(state.data[index].tmp,
-                    //               //     index);
-                    //             },
-                    //             child: Text(
-                    //               "Tambah",
-                    //               style: TextStyle(
-                    //                   fontFamily: 'ZCOOL QingKe HuangYou',
-                    //                   fontSize: 20.0),
-                    //             ),
-                    //           ),
-                    //         )
-                    //       : Column(
-                    //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //           children: <Widget>[
-                    //             FlatButton(
-                    //               color: Colors.black,
-                    //               textColor: Colors.white,
-                    //               shape: RoundedRectangleBorder(
-                    //                   side: BorderSide(
-                    //                       color:
-                    //                           Color.fromRGBO(243, 156, 18, 20),
-                    //                       width: 0,
-                    //                       style: BorderStyle.solid),
-                    //                   borderRadius: BorderRadius.circular(11)),
-                    //               onPressed: () {
-                    //                 data[index] = minMakanan(data[index]);
-                    //               },
-                    //               child: Text(
-                    //                 "-",
-                    //                 style: TextStyle(fontSize: 20.0),
-                    //               ),
-                    //             ),
-                    //             Text(
-                    //               mkn.tmp.toString(),
-                    //               style: TextStyle(fontSize: 20.0),
-                    //             ),
-                    //             FlatButton(
-                    //               color: Colors.black,
-                    //               textColor: Colors.white,
-                    //               shape: RoundedRectangleBorder(
-                    //                   side: BorderSide(
-                    //                       color:
-                    //                           Color.fromRGBO(243, 156, 18, 20),
-                    //                       width: 0,
-                    //                       style: BorderStyle.solid),
-                    //                   borderRadius: BorderRadius.circular(11)),
-                    //               onPressed: () {
-                    //                 data[index] = addMakanan(data[index]);
-                    //               },
-                    //               child: Text(
-                    //                 "+",
-                    //                 style: TextStyle(fontSize: 20.0),
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    // ),
-                    Divider(
-                      color: Color.fromRGBO(243, 156, 18, 20),
-                    ),
-                  ],
-                ));
-          },
-        ),
-      ],
+                            )
+                          : Column(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 7.0),
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      border: Border.all(),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  child: GestureDetector(
+                                    child: Icon(
+                                      Icons.keyboard_arrow_up,
+                                      color: Color.fromRGBO(243, 156, 18, 20),
+                                      size: 30,
+                                    ),
+                                    onTap: () {
+                                      data[index] = addMakanan(data[index]);
+                                    },
+                                  ),
+                                ),
+                                Text(
+                                  mkn.tmp.toString(),
+                                  style: TextStyle(fontSize: 25.0),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 7.0),
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      border: Border.all(),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  child: GestureDetector(
+                                    child: Icon(
+                                      Icons.keyboard_arrow_down,
+                                      size: 30,
+                                      color: Color.fromRGBO(243, 156, 18, 20),
+                                    ),
+                                    onTap: () {
+                                      data[index] = minMakanan(data[index]);
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                      // ],
+                      // ),
+                      // Center(
+                      //   child: mkn.tmp == "0"
+                      //       ? SizedBox(
+                      //           width: double.infinity,
+                      //           child: FlatButton(
+                      //             textColor: Color.fromRGBO(243, 156, 18, 20),
+                      //             color: Colors.black,
+                      //             shape: RoundedRectangleBorder(
+                      //                 side: BorderSide(
+                      //                     color: Color.fromRGBO(243, 156, 18, 20),
+                      //                     width: 0,
+                      //                     style: BorderStyle.solid),
+                      //                 borderRadius: BorderRadius.circular(11)),
+                      //             onPressed: () {
+                      //               data[index] = addMakanan(data[index]);
+                      //               // addMakanan(state.data[index].tmp,
+                      //               //     index);
+                      //             },
+                      //             child: Text(
+                      //               "Tambah",
+                      //               style: TextStyle(
+                      //                   fontFamily: 'ZCOOL QingKe HuangYou',
+                      //                   fontSize: 20.0),
+                      //             ),
+                      //           ),
+                      //         )
+                      //       : Column(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //           children: <Widget>[
+                      //             FlatButton(
+                      //               color: Colors.black,
+                      //               textColor: Colors.white,
+                      //               shape: RoundedRectangleBorder(
+                      //                   side: BorderSide(
+                      //                       color:
+                      //                           Color.fromRGBO(243, 156, 18, 20),
+                      //                       width: 0,
+                      //                       style: BorderStyle.solid),
+                      //                   borderRadius: BorderRadius.circular(11)),
+                      //               onPressed: () {
+                      //                 data[index] = minMakanan(data[index]);
+                      //               },
+                      //               child: Text(
+                      //                 "-",
+                      //                 style: TextStyle(fontSize: 20.0),
+                      //               ),
+                      //             ),
+                      //             Text(
+                      //               mkn.tmp.toString(),
+                      //               style: TextStyle(fontSize: 20.0),
+                      //             ),
+                      //             FlatButton(
+                      //               color: Colors.black,
+                      //               textColor: Colors.white,
+                      //               shape: RoundedRectangleBorder(
+                      //                   side: BorderSide(
+                      //                       color:
+                      //                           Color.fromRGBO(243, 156, 18, 20),
+                      //                       width: 0,
+                      //                       style: BorderStyle.solid),
+                      //                   borderRadius: BorderRadius.circular(11)),
+                      //               onPressed: () {
+                      //                 data[index] = addMakanan(data[index]);
+                      //               },
+                      //               child: Text(
+                      //                 "+",
+                      //                 style: TextStyle(fontSize: 20.0),
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      // ),
+                    ],
+                  ),
+                ],
+              ));
+        },
+      ),
     );
   }
 
@@ -243,104 +263,83 @@ class _BerandaState extends State<Beranda> {
                 } else if (state is MakananStateError) {
                   return Center(child: Text(state.message.toString()));
                 } else if (state is MakananStateLoaded) {
-                  return Stack(
+                  return Column(
                     children: <Widget>[
-                      Container(
-                          decoration: new BoxDecoration(
-                              color: Color.fromRGBO(236, 240, 241, 10)),
-                          child: Column(
-                            children: <Widget>[
-                              Carousel(url: Constants.server + "Api/promo"),
-                              Divider(
-                                thickness: 2,
-                                color: Color.fromRGBO(243, 156, 18, 10),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
-                                    child: but(state.data)),
-                              ),
-                              Center(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          2.1,
-                                      child: FlatButton(
-                                        color: Colors.black,
-                                        textColor:
-                                            Color.fromRGBO(243, 156, 18, 20),
-                                        disabledColor: Colors.grey,
-                                        disabledTextColor: Colors.black,
-                                        padding: EdgeInsets.all(8.0),
-                                        splashColor: Colors.blueAccent,
-                                        shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                color: Color.fromRGBO(
-                                                    243, 156, 18, 20),
-                                                width: 0,
-                                                style: BorderStyle.solid),
-                                            borderRadius:
-                                                BorderRadius.circular(11)),
-                                        onPressed: () {
-                                          _makananBloc.add(MakananEventLoad());
-                                          // reset();
-                                        },
-                                        child: Text(
-                                          "Reset",
-                                          style: TextStyle(
-                                              fontSize: 25.0,
-                                              fontFamily:
-                                                  'ZCOOL QingKe HuangYou'),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          2.1,
-                                      child: FlatButton(
-                                        color: Colors.black,
-                                        textColor:
-                                            Color.fromRGBO(243, 156, 18, 20),
-                                        disabledColor: Colors.grey,
-                                        disabledTextColor: Colors.black,
-                                        padding: EdgeInsets.all(8.0),
-                                        splashColor: Colors.blueAccent,
-                                        shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                color: Color.fromRGBO(
-                                                    243, 156, 18, 20),
-                                                width: 0,
-                                                style: BorderStyle.solid),
-                                            borderRadius:
-                                                BorderRadius.circular(11)),
-                                        onPressed: () {
-                                          _makananBloc.add(MakananEventOrder());
-                                          // _makananBloc.add(CabangEventLoad());
-                                          Navigator.of(context).push(
-                                              new MaterialPageRoute(
-                                                  builder:
-                                                      (BuildContext context) =>
-                                                          new CabangClass()));
-                                          // _makananBloc.add(MakananEventOrder(state.data, "iman"));
-                                        },
-                                        child: Text(
-                                          "Order",
-                                          style: TextStyle(
-                                              fontSize: 25.0,
-                                              fontFamily:
-                                                  'ZCOOL QingKe HuangYou'),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                      Carousel(url: Constants.server + "Api/promo"),
+                      Divider(
+                        thickness: 2,
+                        color: Color.fromRGBO(243, 156, 18, 10),
+                      ),
+                      but(state.data),
+                      // Expanded(
+                      //   child:
+                      // ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2.1,
+                              child: FlatButton(
+                                color: Colors.black,
+                                textColor: Color.fromRGBO(243, 156, 18, 20),
+                                disabledColor: Colors.grey,
+                                disabledTextColor: Colors.black,
+                                padding: EdgeInsets.all(8.0),
+                                splashColor: Colors.blueAccent,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Color.fromRGBO(243, 156, 18, 20),
+                                        width: 0,
+                                        style: BorderStyle.solid),
+                                    borderRadius: BorderRadius.circular(11)),
+                                onPressed: () {
+                                  _makananBloc.add(MakananEventLoad());
+                                  // reset();
+                                },
+                                child: Text(
+                                  "Reset",
+                                  style: TextStyle(
+                                      fontSize: 25.0,
+                                      fontFamily: 'ZCOOL QingKe HuangYou'),
                                 ),
                               ),
-                            ],
-                          )),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2.1,
+                              child: FlatButton(
+                                color: Colors.black,
+                                textColor: Color.fromRGBO(243, 156, 18, 20),
+                                disabledColor: Colors.grey,
+                                disabledTextColor: Colors.black,
+                                padding: EdgeInsets.all(8.0),
+                                splashColor: Colors.blueAccent,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Color.fromRGBO(243, 156, 18, 20),
+                                        width: 0,
+                                        style: BorderStyle.solid),
+                                    borderRadius: BorderRadius.circular(11)),
+                                onPressed: () {
+                                  _makananBloc.add(MakananEventOrder());
+                                  // _makananBloc.add(CabangEventLoad());
+                                  Navigator.of(context).push(
+                                      new MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              new Cb()));
+                                  // _makananBloc.add(MakananEventOrder(state.data, "iman"));
+                                },
+                                child: Text(
+                                  "Order",
+                                  style: TextStyle(
+                                      fontSize: 25.0,
+                                      fontFamily: 'ZCOOL QingKe HuangYou'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   );
                 } else {
