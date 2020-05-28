@@ -66,7 +66,7 @@ class _BerandaState extends State<Beranda> {
                                 child: GestureDetector(
                                   child: Icon(
                                     Icons.add,
-                                    size: 40,
+                                    size: 30,
                                     color: Color.fromRGBO(243, 156, 18, 20),
                                   ),
                                   onTap: () {
