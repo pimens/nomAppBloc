@@ -5,13 +5,13 @@ import 'package:http/http.dart' show Client;
 import 'dart:async';
 class MakananProvider{
   Client client = Client();
-  final url = Constants.server+'Api/getMakanan';
+  final url = Constants.server+'Api/getMakananOffset';
   final url1 =Constants.server+'Api/addMakanan';
 
-  Future<List<Makanan>> getMakanan() async{
-    final response = await client.get(url);
+  Future<List<Makanan>> getMakanan(int s,int off) async{
+    final response = await client.get(url+"/"+s.toString()+"/"+off.toString());
     if(response.statusCode==200){
-      // print(response.body);
+      print(response.body);
       return compute(makananFromJson,response.body);
     }else{
       throw Exception('Failed');

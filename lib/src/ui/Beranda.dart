@@ -1,5 +1,5 @@
+import 'package:KimochiApps/src/blocs/Makanan/MakananEvent.dart';
 import 'package:KimochiApps/src/blocs/makanan/MakananBloc.dart';
-import 'package:KimochiApps/src/blocs/makanan/MakananEvent.dart';
 import 'package:KimochiApps/src/blocs/makanan/MakananState.dart';
 import 'package:KimochiApps/src/models/makananModels.dart';
 import 'package:KimochiApps/src/ui/Cabang.dart';
@@ -22,9 +22,13 @@ class Beranda extends StatefulWidget {
 class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
   Animation animation;
   AnimationController animationController;
-
+  ScrollController _controller;
+  bool loadData = false;
+  int s = 0, off = 3;
   @override
   void initState() {
+    _controller = ScrollController();
+    _controller.addListener(_scrollListener);
     super.initState();
     animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
@@ -34,6 +38,22 @@ class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
         .animate(curvedAnimation);
 
     animationController.forward();
+  }
+
+  _scrollListener() {
+    if (_controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange) {
+          print("akhir");
+      setState(() {
+        loadData = true;
+      });
+      setState(() {
+        loadData = false;
+        int tmp = this.s+3;
+        s = s+3;
+        _makananBloc.add(MakananEventGetNewData(tmp, this.off));
+      });
+    }
   }
 
   MakananBloc _makananBloc;
@@ -56,6 +76,7 @@ class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
   Widget but(List<Makanan> data) {
     return Expanded(
       child: ListView.builder(
+        controller: _controller,
         primary: false,
         shrinkWrap: true,
         itemCount: data.length,
@@ -140,80 +161,6 @@ class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
                                 )
                               ],
                             ),
-                      // ],
-                      // ),
-                      // Center(
-                      //   child: mkn.tmp == "0"
-                      //       ? SizedBox(
-                      //           width: double.infinity,
-                      //           child: FlatButton(
-                      //             textColor: Color.fromRGBO(243, 156, 18, 20),
-                      //             color: Colors.black,
-                      //             shape: RoundedRectangleBorder(
-                      //                 side: BorderSide(
-                      //                     color: Color.fromRGBO(243, 156, 18, 20),
-                      //                     width: 0,
-                      //                     style: BorderStyle.solid),
-                      //                 borderRadius: BorderRadius.circular(11)),
-                      //             onPressed: () {
-                      //               data[index] = addMakanan(data[index]);
-                      //               // addMakanan(state.data[index].tmp,
-                      //               //     index);
-                      //             },
-                      //             child: Text(
-                      //               "Tambah",
-                      //               style: TextStyle(
-                      //                   fontFamily: 'ZCOOL QingKe HuangYou',
-                      //                   fontSize: 20.0),
-                      //             ),
-                      //           ),
-                      //         )
-                      //       : Column(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //           children: <Widget>[
-                      //             FlatButton(
-                      //               color: Colors.black,
-                      //               textColor: Colors.white,
-                      //               shape: RoundedRectangleBorder(
-                      //                   side: BorderSide(
-                      //                       color:
-                      //                           Color.fromRGBO(243, 156, 18, 20),
-                      //                       width: 0,
-                      //                       style: BorderStyle.solid),
-                      //                   borderRadius: BorderRadius.circular(11)),
-                      //               onPressed: () {
-                      //                 data[index] = minMakanan(data[index]);
-                      //               },
-                      //               child: Text(
-                      //                 "-",
-                      //                 style: TextStyle(fontSize: 20.0),
-                      //               ),
-                      //             ),
-                      //             Text(
-                      //               mkn.tmp.toString(),
-                      //               style: TextStyle(fontSize: 20.0),
-                      //             ),
-                      //             FlatButton(
-                      //               color: Colors.black,
-                      //               textColor: Colors.white,
-                      //               shape: RoundedRectangleBorder(
-                      //                   side: BorderSide(
-                      //                       color:
-                      //                           Color.fromRGBO(243, 156, 18, 20),
-                      //                       width: 0,
-                      //                       style: BorderStyle.solid),
-                      //                   borderRadius: BorderRadius.circular(11)),
-                      //               onPressed: () {
-                      //                 data[index] = addMakanan(data[index]);
-                      //               },
-                      //               child: Text(
-                      //                 "+",
-                      //                 style: TextStyle(fontSize: 20.0),
-                      //               ),
-                      //             ),
-                      //           ],
-                      //         ),
-                      // ),
                     ],
                   ),
                 ],
@@ -274,6 +221,12 @@ class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
                       // Expanded(
                       //   child:
                       // ),
+                      loadData == false
+                          ? Text("")
+                          : Center(
+                              child: CircularProgressIndicator(
+                              backgroundColor: Color.fromRGBO(243, 156, 18, 20),
+                            )),
                       Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

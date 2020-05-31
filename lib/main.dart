@@ -2,6 +2,7 @@ import 'package:KimochiApps/src/blocs/cabang/CabangBloc.dart';
 import 'package:KimochiApps/src/blocs/Global/GlobalBloc.dart';
 import 'package:KimochiApps/src/blocs/makanan/MakananBloc.dart';
 import 'package:KimochiApps/src/ui/Beranda.dart';
+// import 'package:KimochiApps/src/ui/component/BerandaItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';

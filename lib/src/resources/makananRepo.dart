@@ -5,8 +5,8 @@ import 'dart:async';
 
 class MakananRepo{
   final makananProvider = MakananProvider();
-   Future<List<Makanan>> getMakanan() async{
-    return makananProvider.getMakanan();
+   Future<List<Makanan>> getMakanan(int s,int off) async{
+    return makananProvider.getMakanan(s,off);
   }
   Future saved(String nama) async {
     makananProvider.saved(nama);

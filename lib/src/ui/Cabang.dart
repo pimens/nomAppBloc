@@ -1,8 +1,8 @@
+import 'package:KimochiApps/src/blocs/Makanan/MakananEvent.dart';
 import 'package:KimochiApps/src/blocs/cabang/CabangBloc.dart';
 import 'package:KimochiApps/src/blocs/cabang/CabangEvent.dart';
 import 'package:KimochiApps/src/blocs/cabang/CabangState.dart';
 import 'package:KimochiApps/src/blocs/makanan/MakananBloc.dart';
-import 'package:KimochiApps/src/blocs/makanan/MakananEvent.dart';
 import 'package:KimochiApps/src/models/CabangModels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,7 +78,7 @@ class CabangClass extends State<Cb> with SingleTickerProviderStateMixin {
 
   Future change(BuildContext context) async {
     _makananBloc = BlocProvider.of<MakananBloc>(context);
-    _makananBloc.add(MakananEventLoad());
+    _makananBloc.add(MakananEventGetNewData(-1, 3));
     _cabangBloc.add(CabangEventLoad());
     _cabangBloc = BlocProvider.of<CabangBloc>(context);
     Navigator.of(context).pop(true);

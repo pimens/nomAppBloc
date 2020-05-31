@@ -14,3 +14,8 @@ class MakananEventOrder extends MakananEvent {
   // final String nama;
   // MakananEventOrder({this.m, this.nama});
 }
+class MakananEventGetNewData extends MakananEvent {
+  final int s;
+  final int off;
+  MakananEventGetNewData(this.s, this.off);
+}

@@ -1,5 +1,5 @@
+import 'package:KimochiApps/src/blocs/Makanan/MakananEvent.dart';
 import 'package:KimochiApps/src/blocs/makanan/MakananBloc.dart';
-import 'package:KimochiApps/src/blocs/makanan/MakananEvent.dart';
 import 'package:KimochiApps/src/blocs/makanan/MakananState.dart';
 import 'package:KimochiApps/src/models/makananModels.dart';
 import 'package:flutter/material.dart';
