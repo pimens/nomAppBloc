@@ -132,7 +132,7 @@ class _OrderState extends State<Order> {
   insert(String hp, String n, String m, String j, String st, String al) async {
     int tmp = int.parse(trx[0]['x']);
     tmp = tmp + 1;
-    var url = 'http://192.168.43.184/nomAdmin/Api/insertInvoice';
+    var url = Constants.server + 'Api/insertInvoice';
     await http.post(url, body: {
       "nama": n,
       "hp": hp,

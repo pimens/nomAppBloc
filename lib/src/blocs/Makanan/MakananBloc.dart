@@ -4,7 +4,12 @@ import 'package:KimochiApps/src/models/makananModels.dart';
 import 'package:KimochiApps/src/resources/makananRepo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:async';
-
+//jadi dari beranda statedefaultnya diatur
+//baru add eventnya (makanan event load) lalu cek ke bloc (line)
+//kalo eventnya adalah evenload, maka dia buat state lagi loading
+//habs itu ambil data ke db lewat repo->provider->db. simpennya pake list object dari model
+//hbist itu ganti state jadi state loaded, oper listmakanan yang sudah diambil dari db ke state
+//hbis itu data list makanan bakalan bisa diakses di beranda pake state.data (tergantung nama variabel)
 class MakananBloc extends Bloc<MakananEvent, MakananState> {
   MakananRepo mknRepo = new MakananRepo();
   List<Makanan> order = [];
