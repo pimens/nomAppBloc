@@ -64,7 +64,7 @@ class _ItemSearchState extends State<ItemSearch>
   Widget build(BuildContext context) {
     return SlideTransition(
       position: animation,
-          child: Padding(
+      child: Padding(
         padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
         child: Container(
           // color: Color(0xFF3B3A3A),
@@ -91,7 +91,7 @@ class _ItemSearchState extends State<ItemSearch>
                           topRight: Radius.circular(10),
                         ),
                         child: Image.network(
-                          Constants.server + "${widget.img}",
+                          Constants.server1 + "${widget.img}",
                           fit: BoxFit.fill,
                         ),
                       ),

@@ -4,30 +4,32 @@
 
 import 'dart:convert';
 
-List<Trx> trxFromJson(String str) => List<Trx>.from(json.decode(str).map((x) => Trx.fromJson(x)));
+List<Trx> trxFromJson(String str) =>
+    List<Trx>.from(json.decode(str).map((x) => Trx.fromJson(x)));
 
-String trxToJson(List<Trx> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String trxToJson(List<Trx> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Trx {
-    String status;
-    String user;
-    String nomorhp;
-    String gambar;
-    String nama;
-    String jumlah;
-    String subtotal;
+  int status;
+  String user;
+  String nomorhp;
+  String gambar;
+  String nama;
+  int jumlah;
+  int subtotal;
 
-    Trx({
-        this.status,
-        this.user,
-        this.nomorhp,
-        this.gambar,
-        this.nama,
-        this.jumlah,
-        this.subtotal,
-    });
+  Trx({
+    this.status,
+    this.user,
+    this.nomorhp,
+    this.gambar,
+    this.nama,
+    this.jumlah,
+    this.subtotal,
+  });
 
-    factory Trx.fromJson(Map<String, dynamic> json) => Trx(
+  factory Trx.fromJson(Map<String, dynamic> json) => Trx(
         status: json["status"],
         user: json["user"],
         nomorhp: json["nomorhp"],
@@ -35,9 +37,9 @@ class Trx {
         nama: json["nama"],
         jumlah: json["jumlah"],
         subtotal: json["subtotal"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "status": status,
         "user": user,
         "nomorhp": nomorhp,
@@ -45,5 +47,5 @@ class Trx {
         "nama": nama,
         "jumlah": jumlah,
         "subtotal": subtotal,
-    };
+      };
 }

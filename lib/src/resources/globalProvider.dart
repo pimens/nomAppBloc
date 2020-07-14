@@ -6,10 +6,10 @@ import 'dart:async';
 
 class GlobalProvider {
   Client client = Client();
-  final url = Constants.server + 'Api/getTrxById/';
+  final url = Constants.server + 'getTrxById/';
   //DETAILORDER
   Future<List<Trx>> getDetailOrder(String id) async {
-    final response = await client.get(url+id);
+    final response = await client.get(url + id);
     if (response.statusCode == 200) {
       print(response.body);
       return compute(trxFromJson, response.body);
@@ -17,10 +17,9 @@ class GlobalProvider {
       throw Exception('Failed');
     }
   }
+
   Future delete(String notrx) async {
-    await client.get(
-        Uri.encodeFull(Constants.server + "Api/deleteTrx/" + notrx),
+    await client.get(Uri.encodeFull(Constants.server + 'deleteTrx/' + notrx),
         headers: {"Accept": "application/json"});
-    
   }
 }

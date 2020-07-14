@@ -43,14 +43,14 @@ class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
   _scrollListener() {
     if (_controller.offset >= _controller.position.maxScrollExtent &&
         !_controller.position.outOfRange) {
-          print("akhir");
+      print("akhir");
       setState(() {
         loadData = true;
       });
       setState(() {
         loadData = false;
-        int tmp = this.s+3;
-        s = s+3;
+        int tmp = this.s + 3;
+        s = s + 3;
         _makananBloc.add(MakananEventGetNewData(tmp, this.off));
       });
     }
@@ -96,7 +96,7 @@ class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
                         img: mkn.gambar.toString(),
                         title: mkn.nama,
                         address: mkn.kategori,
-                        rating: mkn.harga,
+                        rating: mkn.harga.toString(),
                         view: index.toString(),
                       ),
                       mkn.tmp == "0"
@@ -212,7 +212,7 @@ class _BerandaState extends State<Beranda> with SingleTickerProviderStateMixin {
                 } else if (state is MakananStateLoaded) {
                   return Column(
                     children: <Widget>[
-                      Carousel(url: Constants.server + "Api/promo"),
+                      Carousel(url: Constants.server + "promo"),
                       Divider(
                         thickness: 2,
                         color: Color.fromRGBO(243, 156, 18, 10),

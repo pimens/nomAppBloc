@@ -13,12 +13,13 @@ class Cb extends StatefulWidget {
   @override
   CabangClass createState() => CabangClass();
 }
+
 // st
 class CabangClass extends State<Cb> with SingleTickerProviderStateMixin {
   Animation animation;
   AnimationController animationController;
 
-   @override
+  @override
   void initState() {
     super.initState();
     animationController =
@@ -87,7 +88,7 @@ class CabangClass extends State<Cb> with SingleTickerProviderStateMixin {
   Widget buildListCabang(BuildContext context, List<Cabang> data) {
     return SlideTransition(
       position: animation,
-          child: Column(
+      child: Column(
         children: <Widget>[
           Expanded(
             child: ListView.builder(
@@ -111,8 +112,8 @@ class CabangClass extends State<Cb> with SingleTickerProviderStateMixin {
                             decoration: new BoxDecoration(
                               shape: BoxShape.rectangle,
                               color: Colors.black,
-                              borderRadius:
-                                  new BorderRadius.all(new Radius.circular(10.0)),
+                              borderRadius: new BorderRadius.all(
+                                  new Radius.circular(10.0)),
                             ),
                             child: Container(
                               width: MediaQuery.of(context).size.width / 7,
@@ -160,7 +161,7 @@ class CabangClass extends State<Cb> with SingleTickerProviderStateMixin {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Order(cab: cbg.id),
+                            builder: (context) => Order(cab: cbg.id.toString()),
                           ),
                         );
                       },

@@ -101,7 +101,7 @@ class _CarouselState extends State<Carousel> {
                                             topRight: Radius.circular(10),
                                           ),
                                           child: Image.network(
-                                            Constants.server + d['gambar'],
+                                            Constants.server1 + d['gambar'],
                                             fit: BoxFit.cover,
                                           ),
                                         ),

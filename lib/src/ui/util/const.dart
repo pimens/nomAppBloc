@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
-class Constants{
 
+class Constants {
   static String appName = "Kimochi";
-  static String server = "http://192.168.43.184/nomAdmin/";
+  //utk method
+  // static String server = "http://192.168.43.184/nomAdmin/Api/";
+  //utk gambar
+  // static String server1 = "http://192.168.43.184/nomAdmin/";
 
+  //utk method
+  static String server =
+      "http://192.168.43.184/kimochiAdminLaravel/public/api/makanan/";
+  //utk gambar
+  static String server1 =
+      "http://192.168.43.184/kimochiAdminLaravel/public/uploads/data/thumb/";
 
   //Colors for theme
   static Color lightPrimary = Color(0xfffcfcff);
@@ -17,7 +26,7 @@ class Constants{
   static ThemeData lightTheme = ThemeData(
     backgroundColor: lightBG,
     primaryColor: lightPrimary,
-    accentColor:  lightAccent,
+    accentColor: lightAccent,
     cursorColor: lightAccent,
     scaffoldBackgroundColor: lightBG,
     appBarTheme: AppBarTheme(
@@ -54,6 +63,4 @@ class Constants{
 //      ),
     ),
   );
-
-
 }

@@ -6,7 +6,7 @@ import 'dart:async';
 
 class CabangProvider {
   Client client = Client();
-  final url = Constants.server + 'Api/getCabang';
+  final url = Constants.server + 'getCabang';
 
   Future<List<Cabang>> getCabang() async {
     final response = await client.get(url);

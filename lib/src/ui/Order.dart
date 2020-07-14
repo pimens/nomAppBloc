@@ -39,7 +39,7 @@ class _OrderState extends State<Order> {
 
   Future ambildata() async {
     http.Response hasil = await http.get(
-        Uri.encodeFull(Constants.server + "Api/getMaxTrx"),
+        Uri.encodeFull(Constants.server + "getMaxTrx"),
         headers: {"Accept": "application/json"});
     this.setState(() {
       trx = json.decode(hasil.body);
@@ -49,7 +49,9 @@ class _OrderState extends State<Order> {
   double total(List<Makanan> order) {
     double x = 0;
     for (int i = 0; i < order.length; i++) {
-      x = x + (double.parse(order[i].tmp) * double.parse(order[i].harga));
+      x = x +
+          (double.parse(order[i].tmp) *
+              double.parse(order[i].harga.toString()));
     }
     return x;
   }
@@ -72,7 +74,7 @@ class _OrderState extends State<Order> {
           "+" +
           order[i].nama +
           "+=+" +
-          (double.parse(order[i].tmp) * double.parse(order[i].harga))
+          (double.parse(order[i].tmp) * double.parse(order[i].harga.toString()))
               .toString() +
           "%0A";
     }
@@ -85,12 +87,11 @@ class _OrderState extends State<Order> {
 
   Future userExist(List<Makanan> order) async {
     http.Response hasil = await http.get(
-        Uri.encodeFull(
-            Constants.server + "Api/getJUser/" + hpCont.text.toString()),
+        Uri.encodeFull(Constants.server + "getJUser/" + hpCont.text.toString()),
         headers: {"Accept": "application/json"});
     this.setState(() {
       List u = json.decode(hasil.body);
-      isNewUser = int.parse(u[0]['j']);
+      isNewUser = int.parse(u[0]['j'].toString());
       if (isNewUser == 0) {
         insertUser(order);
       } else {
@@ -102,7 +103,7 @@ class _OrderState extends State<Order> {
   Future insertUser(List<Makanan> order) async {
     await http.get(
         Uri.encodeFull(Constants.server +
-            "Api/insertUser/" +
+            "insertUser/" +
             namaCont.text.toString() +
             "/" +
             hpCont.text.toString()),
@@ -117,9 +118,9 @@ class _OrderState extends State<Order> {
       insert(
           hpCont.text,
           namaCont.text,
-          order[i].id,
+          order[i].id.toString(),
           order[i].tmp,
-          (double.parse(order[i].tmp) * double.parse(order[i].harga))
+          (double.parse(order[i].tmp) * double.parse(order[i].harga.toString()))
               .toString(),
           alamatCont.text);
     }
@@ -130,9 +131,9 @@ class _OrderState extends State<Order> {
   }
 
   insert(String hp, String n, String m, String j, String st, String al) async {
-    int tmp = int.parse(trx[0]['x']);
+    int tmp = int.parse(trx[0]['x'].toString());
     tmp = tmp + 1;
-    var url = Constants.server + 'Api/insertInvoice';
+    var url = Constants.server + 'insertInvoice';
     await http.post(url, body: {
       "nama": n,
       "hp": hp,
@@ -213,7 +214,7 @@ class _OrderState extends State<Order> {
                                               child: CircleAvatar(
                                                   radius: 20,
                                                   backgroundImage: NetworkImage(
-                                                      Constants.server +
+                                                      Constants.server1 +
                                                           mkn.gambar))),
                                           Text(
                                             mkn.tmp + "   ",
@@ -257,7 +258,8 @@ class _OrderState extends State<Order> {
                                         ),
                                         Text(
                                           (double.parse(mkn.tmp) *
-                                                      double.parse(mkn.harga))
+                                                      double.parse(
+                                                          mkn.harga.toString()))
                                                   .toString() +
                                               " ",
                                           style: TextStyle(

@@ -22,7 +22,7 @@ class _DetailOrderState extends State<DetailOrder> {
   double total(List<Trx> order) {
     double x = 0;
     for (int i = 0; i < order.length; i++) {
-      x = x + (double.parse(order[i].subtotal));
+      x = x + (double.parse(order[i].subtotal.toString()));
     }
     return x;
   }
@@ -55,7 +55,7 @@ class _DetailOrderState extends State<DetailOrder> {
                               child: CircleAvatar(
                                   radius: 20,
                                   backgroundImage: NetworkImage(
-                                      Constants.server +
+                                      Constants.server1 +
                                           order.gambar.toString()))),
                           Text(
                             order.jumlah.toString() + "   ",

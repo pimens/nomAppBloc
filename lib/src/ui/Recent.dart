@@ -35,7 +35,7 @@ class _RecentState extends State<Recent> {
 
   Future ambildata() async {
     http.Response hasil = await http.get(
-        Uri.encodeFull(Constants.server + "Api/getTrx/" + hp),
+        Uri.encodeFull(Constants.server + "getTrx/" + hp),
         headers: {"Accept": "application/json"});
     if (!mounted) return;
     this.setState(() {
@@ -116,10 +116,10 @@ class _RecentState extends State<Recent> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 25.0),
-                      child: Stack(                        
+                      child: Stack(
                         children: <Widget>[
                           Dismissible(
-                            key: Key(current[index]['notrx']),
+                            key: Key(current[index]['notrx'].toString()),
                             direction: DismissDirection.startToEnd,
                             // onDismissed: (direction) {
                             //   setState(() {
